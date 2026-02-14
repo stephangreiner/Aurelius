@@ -21,8 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 1; i <= 17; i++) {
         window[`g1_${i}`] = greek[`g1_${i}`] || "";
       }
-      for (let i = 1; i <= 16; i++) {
+      for (let i = 1; i <= 17; i++) {
         window[`g2_${i}`] = greek[`g2_${i}`] || "";
+      }
+      for (let i = 1; i <= 16; i++) {
         window[`g3_${i}`] = greek[`g3_${i}`] || "";
       }
       for (let i = 1; i <= 51; i++) {
@@ -32,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window[`g5_${i}`] = greek[`g5_${i}`] || "";
       }
       for (let i = 1; i <= 59; i++) {
-        window[`g6_${i}`] = greek[`g6${i}`] || "";
+        window[`g6_${i}`] = greek[`g6_${i}`] || "";
       }
       greekLoaded = true;
     })
@@ -50,8 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 1; i <= 17; i++) {
         window[`l1_${i}`] = long[`l1_${i}`] || "";
       }
-      for (let i = 1; i <= 16; i++) {
+      for (let i = 1; i <= 17; i++) {
         window[`l2_${i}`] = long[`l2_${i}`] || "";
+      }
+      for (let i = 1; i <= 16; i++) {
         window[`l3_${i}`] = long[`l3_${i}`] || "";
       }
       for (let i = 1; i <= 51; i++) {
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window[`l5_${i}`] = long[`l5_${i}`] || "";
       }
    for (let i = 1; i <= 59; i++) {
-        window[`l6_${i}`] = long[`l6${i}`] || "";
+        window[`l6_${i}`] = long[`l6_${i}`] || "";
       }
 
 
@@ -81,8 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 1; i <= 17; i++) {
         window[`h1_${i}`] = hilaire[`h1_${i}`] || "";
       }
-      for (let i = 1; i <= 16; i++) {
+      for (let i = 1; i <= 17; i++) {
         window[`h2_${i}`] = hilaire[`h2_${i}`] || "";
+      }
+      for (let i = 1; i <= 16; i++) {
         window[`h3_${i}`] = hilaire[`h3_${i}`] || "";
       }
          for (let i = 1; i <= 51; i++) {
@@ -92,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window[`h5_${i}`] = hilaire[`h5_${i}`] || "";
       }
    for (let i = 1; i <= 59; i++) {
-        window[`h6_${i}`] = hilaire[`h6${i}`] || "";
+        window[`h6_${i}`] = hilaire[`h6_${i}`] || "";
       }
 
       hilaireLoaded = true;
@@ -111,8 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 1; i <= 17; i++) {
         window[`c1_${i}`] = casaubon[`c1_${i}`] || "";
       }
-      for (let i = 1; i <= 16; i++) {
+      for (let i = 1; i <= 17; i++) {
         window[`c2_${i}`] = casaubon[`c2_${i}`] || "";
+      }
+      for (let i = 1; i <= 16; i++) {
         window[`c3_${i}`] = casaubon[`c3_${i}`] || "";
       }
                for (let i = 1; i <= 51; i++) {
@@ -122,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window[`c5_${i}`] = casaubon[`c5_${i}`] || "";
       }
    for (let i = 1; i <= 59; i++) {
-        window[`c6_${i}`] = casaubon[`c6${i}`] || "";
+        window[`c6_${i}`] = casaubon[`c6_${i}`] || "";
       }
 
       casaubonLoaded = true;

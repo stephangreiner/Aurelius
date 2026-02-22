@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Text ein-/ausblenden mit Farbänderung am Button
 function toggleText(id, content, className, button) {
   const e = document.getElementById(id);
-  if (!e) return;
+  if (!e || !button) return;
 
   // Prüfen, ob der Button aktuell aktiv ist
   const isActive = button.dataset.active === "true";
@@ -252,12 +252,32 @@ function toggleText(id, content, className, button) {
     // Button Style zurücksetzen
     button.style.backgroundColor = "";
     button.style.color = "";
-  } else {
-    // Text einblenden
-    e.innerHTML = `<span class="${className}">${content}</span>`;
-    button.dataset.active = "true";
-    // Button einfärben
-    const colors = activeColors[className];
+    return;
+  }
+
+  // Alle Sprachbuttons derselben Zeile deaktivieren, damit nur eine Übersetzung aktiv ist
+  const buttonContainer = button.closest('.bu_lang');
+  if (buttonContainer) {
+    buttonContainer.querySelectorAll('button').forEach((btn) => {
+      btn.dataset.active = "false";
+      btn.style.backgroundColor = "";
+      btn.style.color = "";
+    });
+  }
+
+  // Nur Text anzeigen, wenn Inhalt vorhanden ist
+  if (!content) {
+    e.innerHTML = "";
+    return;
+  }
+
+  // Text einblenden
+  e.innerHTML = `<span class="${className}">${content}</span>`;
+  button.dataset.active = "true";
+
+  // Button einfärben
+  const colors = activeColors[className];
+  if (colors) {
     button.style.backgroundColor = colors.background;
     button.style.color = colors.color;
   }

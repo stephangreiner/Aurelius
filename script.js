@@ -139,115 +139,42 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Could not load casaubon.json:', error);
     });
 
-  // Event-Listener für Buch 1
-  for (let i = 1; i <= 17; i++) {
-    document.getElementById(`bg1_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x1_${i}`, window[`g1_${i}`], "greek", e.currentTarget)
-    );
-    document.getElementById(`bl1_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x1_${i}`, window[`l1_${i}`], "long", e.currentTarget)
-    );
-    document.getElementById(`bh1_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x1_${i}`, window[`h1_${i}`], "hilaire", e.currentTarget)
-    );
-    document.getElementById(`bc1_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x1_${i}`, window[`c1_${i}`], "casaubon", e.currentTarget)
-    );
-  }
+  // Event-Listener für alle Übersetzungsbuttons (robust gegen Lücken/Vertipper in IDs)
+  const translationPrefixMap = {
+    g: { keyPrefix: "g", className: "greek" },
+    l: { keyPrefix: "l", className: "long" },
+    h: { keyPrefix: "h", className: "hilaire" },
+    c: { keyPrefix: "c", className: "casaubon" }
+  };
 
-  // Event-Listener für Buch 2
-  for (let i = 1; i <= 17; i++) {
-    document.getElementById(`bg2_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x2_${i}`, window[`g2_${i}`], "greek", e.currentTarget)
-    );
-    document.getElementById(`bl2_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x2_${i}`, window[`l2_${i}`], "long", e.currentTarget)
-    );
-    document.getElementById(`bh2_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x2_${i}`, window[`h2_${i}`], "hilaire", e.currentTarget)
-    );
-    document.getElementById(`bc2_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x2_${i}`, window[`c2_${i}`], "casaubon", e.currentTarget)
-    );
-  }
+  document.querySelectorAll('button[id]').forEach((button) => {
+    const match = button.id.match(/^b([glhc])(\d+)_(\d+)$/);
+    if (!match) return;
 
-  // Event-Listener für Buch 3
-  for (let i = 1; i <= 16; i++) {
-    document.getElementById(`bg3_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x3_${i}`, window[`g3_${i}`], "greek", e.currentTarget)
-    );
-    document.getElementById(`bl3_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x3_${i}`, window[`l3_${i}`], "long", e.currentTarget)
-    );
-    document.getElementById(`bh3_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x3_${i}`, window[`h3_${i}`], "hilaire", e.currentTarget)
-    );
-    document.getElementById(`bc3_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x3_${i}`, window[`c3_${i}`], "casaubon", e.currentTarget)
-    );
-  }
+    const [, language, book, section] = match;
+    const config = translationPrefixMap[language];
+    if (!config) return;
 
-  // Event-Listener für Buch 4
-  for (let i = 1; i <= 51; i++) {
-    document.getElementById(`bg4_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x4_${i}`, window[`g4_${i}`], "greek", e.currentTarget)
-    );
-    document.getElementById(`bl4_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x4_${i}`, window[`l4_${i}`], "long", e.currentTarget)
-    );
-    document.getElementById(`bh4_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x4_${i}`, window[`h4_${i}`], "hilaire", e.currentTarget)
-    );
-    document.getElementById(`bc4_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x4_${i}`, window[`c4_${i}`], "casaubon", e.currentTarget)
-    );
-  }
-  // Event-Listener für Buch 5
-  for (let i = 1; i <= 37; i++) {
-    document.getElementById(`bg5_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x5_${i}`, window[`g5_${i}`], "greek", e.currentTarget)
-    );
-    document.getElementById(`bl5_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x5_${i}`, window[`l5_${i}`], "long", e.currentTarget)
-    );
-    document.getElementById(`bh5_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x5_${i}`, window[`h5_${i}`], "hilaire", e.currentTarget)
-    );
-    document.getElementById(`bc5_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x5_${i}`, window[`c5_${i}`], "casaubon", e.currentTarget)
-    );
-  }
-
-    // Event-Listener für Buch 5
-  for (let i = 1; i <= 59; i++) {
-    document.getElementById(`bg6_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x6_${i}`, window[`g6_${i}`], "greek", e.currentTarget)
-    );
-    document.getElementById(`bl6_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x6_${i}`, window[`l6_${i}`], "long", e.currentTarget)
-    );
-    document.getElementById(`bh6_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x6_${i}`, window[`h6_${i}`], "hilaire", e.currentTarget)
-    );
-    document.getElementById(`bc6_${i}`)?.addEventListener("click", (e) =>
-      toggleText(`x6_${i}`, window[`c6_${i}`], "casaubon", e.currentTarget)
-    );
-  }
+    button.addEventListener("click", (e) => {
+      const target = e.currentTarget.closest("article")?.querySelector(".xx");
+      const content = window[`${config.keyPrefix}${book}_${section}`];
+      toggleText(target, content, config.className, e.currentTarget);
+    });
+  });
 
 
 });
 
 // Text ein-/ausblenden mit Farbänderung am Button
-function toggleText(id, content, className, button) {
-  const e = document.getElementById(id);
-  if (!e || !button) return;
+function toggleText(targetElement, content, className, button) {
+  if (!targetElement || !button) return;
 
   // Prüfen, ob der Button aktuell aktiv ist
   const isActive = button.dataset.active === "true";
 
   if (isActive) {
     // Text ausblenden
-    e.innerHTML = "";
+    targetElement.innerHTML = "";
     button.dataset.active = "false";
     // Button Style zurücksetzen
     button.style.backgroundColor = "";
@@ -256,9 +183,9 @@ function toggleText(id, content, className, button) {
   }
 
   // Alle Sprachbuttons derselben Zeile deaktivieren, damit nur eine Übersetzung aktiv ist
-  const buttonContainer = button.closest('.bu_lang');
+  const buttonContainer = button.closest("article");
   if (buttonContainer) {
-    buttonContainer.querySelectorAll('button').forEach((btn) => {
+    buttonContainer.querySelectorAll('button[id^="bg"], button[id^="bl"], button[id^="bh"], button[id^="bc"]').forEach((btn) => {
       btn.dataset.active = "false";
       btn.style.backgroundColor = "";
       btn.style.color = "";
@@ -267,12 +194,12 @@ function toggleText(id, content, className, button) {
 
   // Nur Text anzeigen, wenn Inhalt vorhanden ist
   if (!content) {
-    e.innerHTML = "";
+    targetElement.innerHTML = "";
     return;
   }
 
   // Text einblenden
-  e.innerHTML = `<span class="${className}">${content}</span>`;
+  targetElement.innerHTML = `<span class="${className}">${content}</span>`;
   button.dataset.active = "true";
 
   // Button einfärben
@@ -303,8 +230,15 @@ function toggleClassDisplay(className) {
 
 // Buchabschnitte ein-/ausblenden
 function buchAnAus(id) {
-  const e = document.getElementById(id);
-  e.style.display = (e.style.display === "none") ? "block" : "none";
+  const clickedButton = (typeof event !== "undefined" && event?.currentTarget instanceof HTMLElement)
+    ? event.currentTarget
+    : null;
+  const section = clickedButton?.closest("section");
+  const target = section?.querySelector(".blocksatz") || document.getElementById(id);
+
+  if (!target) return;
+
+  target.style.display = (target.style.display === "none") ? "block" : "none";
 }
 
 // Scrollposition beim Verlassen der Seite speichern

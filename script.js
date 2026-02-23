@@ -230,8 +230,15 @@ function toggleClassDisplay(className) {
 
 // Buchabschnitte ein-/ausblenden
 function buchAnAus(id) {
-  const e = document.getElementById(id);
-  e.style.display = (e.style.display === "none") ? "block" : "none";
+  const clickedButton = (typeof event !== "undefined" && event?.currentTarget instanceof HTMLElement)
+    ? event.currentTarget
+    : null;
+  const section = clickedButton?.closest("section");
+  const target = section?.querySelector(".blocksatz") || document.getElementById(id);
+
+  if (!target) return;
+
+  target.style.display = (target.style.display === "none") ? "block" : "none";
 }
 
 // Scrollposition beim Verlassen der Seite speichern

@@ -141,10 +141,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Event-Listener für alle Übersetzungsbuttons (robust gegen Lücken/Vertipper in IDs)
   const translationPrefixMap = {
-    g: { keyPrefix: "g", className: "greek" },
-    l: { keyPrefix: "l", className: "long" },
-    h: { keyPrefix: "h", className: "hilaire" },
-    c: { keyPrefix: "c", className: "casaubon" }
+    g: { keyPrefix: "g", className: "greek", label: "Griechisch (Original)" },
+    l: { keyPrefix: "l", className: "long", label: "Englisch (Long)" },
+    h: { keyPrefix: "h", className: "hilaire", label: "Englisch (Hilaire)" },
+    c: { keyPrefix: "c", className: "casaubon", label: "Englisch (Casaubon)" }
   };
 
   document.querySelectorAll('button[id]').forEach((button) => {
@@ -155,6 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const config = translationPrefixMap[language];
     if (!config) return;
 
+    // Add tooltip so abbreviation is self-explanatory
+    button.title = config.label;
+
     button.addEventListener("click", (e) => {
       const target = e.currentTarget.closest("article")?.querySelector(".xx");
       const content = window[`${config.keyPrefix}${book}_${section}`];
@@ -162,6 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Style book collapse buttons and mark header toggle initial state
+  document.querySelectorAll('[id^="kapitelbox"] > button').forEach(btn => {
+    btn.classList.add("book-toggle");
+  });
+
+  // German text is visible by default → mark #b_de as active
+  document.getElementById("b_de")?.classList.add("active");
 
 });
 
@@ -212,33 +222,43 @@ function toggleText(targetElement, content, className, button) {
 
 // Deutsch ein-/ausblenden
 function de_an_aus() {
-  toggleClassDisplay("de");
+  const isNowVisible = toggleClassDisplay("de");
+  document.getElementById("b_de")?.classList.toggle("active", isNowVisible);
 }
 
 // Sprachbuttons ein-/ausblenden
 function lang_an_aus() {
-  toggleClassDisplay("bu_lang");
+  const isNowVisible = toggleClassDisplay("bu_lang");
+  document.getElementById("lang")?.classList.toggle("active", isNowVisible);
 }
 
-// Beliebige Klasse umschalten
+// Beliebige Klasse umschalten – gibt zurück, ob Elemente jetzt sichtbar sind
 function toggleClassDisplay(className) {
   const elements = document.querySelectorAll(`.${className}`);
+  if (!elements.length) return false;
+  const isCurrentlyVisible = window.getComputedStyle(elements[0]).display !== "none";
   elements.forEach(el => {
-    el.style.display = (el.style.display === "none") ? "inline-block" : "none";
+    el.style.display = isCurrentlyVisible ? "none" : "";
+    // Falls CSS die Klasse auf display:none setzt, brauchen wir einen expliziten Wert
+    if (!isCurrentlyVisible && window.getComputedStyle(el).display === "none") {
+      el.style.display = "inline-block";
+    }
   });
+  return !isCurrentlyVisible;
 }
 
 // Buchabschnitte ein-/ausblenden
-function buchAnAus(id) {
-  const clickedButton = (typeof event !== "undefined" && event?.currentTarget instanceof HTMLElement)
-    ? event.currentTarget
-    : null;
-  const section = clickedButton?.closest("section");
+function buchAnAus(btn, id) {
+  const section = btn.closest("section");
   const target = section?.querySelector(".blocksatz") || document.getElementById(id);
-
   if (!target) return;
 
-  target.style.display = (target.style.display === "none") ? "block" : "none";
+  const isNowVisible = target.style.display === "none";
+  target.style.display = isNowVisible ? "block" : "none";
+
+  // Pfeil-Indikator aktualisieren
+  const arrow = btn.querySelector("span");
+  if (arrow) arrow.textContent = isNowVisible ? " ▼" : " ▶";
 }
 
 // Scrollposition beim Verlassen der Seite speichern

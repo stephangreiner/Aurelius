@@ -10,13 +10,13 @@
 </link></head>
 <body>
 <header id="kopf">
-<button id="b_de" onclick="de_an_aus()">de</button>
-<button id="lang" onclick="lang_an_aus()">lang</button>
+<button id="b_de" onclick="de_an_aus()" title="Deutschen Text ein-/ausblenden">DE</button>
+<button id="lang" onclick="lang_an_aus()" title="Übersetzungen ein-/ausblenden">Übers.</button>
 </header>
 <main id="haupt">
 <h1>zu mir selbst - Marcus Aurelius </h1>
 <section id="kapitelbox1">
-<button aria-hidden="true" onclick="buchAnAus('Buch1')" type="button">Buch 1 <span id="b1a"> ⇦ </span></button>
+<button aria-hidden="true" onclick="buchAnAus(this, 'Buch1')" type="button">Buch 1 <span id="b1a"> ▼</span></button>
 <div class="blocksatz" id="Buch1">
 <article class="uw">
 <p class="de" id="d1.1">[1.1] Von meinem Großvater Verus: Anstand und ein mildes Wesen.</p>
@@ -171,7 +171,7 @@
 </div>
 </section>
 <section id="kapitelbox2">
-<button aria-hidden="true" onclick="buchAnAus('Buch2')" type="button">Buch 2 <span id="b2a">⇦</span> </button><br/>
+<button aria-hidden="true" onclick="buchAnAus(this, 'Buch2')" type="button">Buch 2 <span id="b2a"> ▼</span></button>
 <div class="blocksatz" id="Buch2">
 <article class="uw"><p class="de" id="d1.18"></p></article>
 <article class="uw">
@@ -313,7 +313,7 @@
 </div>
 </section>
 <section id="kapitelbox3">
-<button aria-hidden="true" onclick="buchAnAus('Buch3')" type="button">Buch 3 <span id="b3a">⇦</span> </button><br/>
+<button aria-hidden="true" onclick="buchAnAus(this, 'Buch3')" type="button">Buch 3 <span id="b3a"> ▼</span></button>
 <div class="blocksatz" id="Buch3">
 <article class="uw"><p class="de" id="d2.18"></p></article>
 <article class="uw">
@@ -447,7 +447,7 @@
 </div>
 </section>
 <section id="kapitelbox4">
-<button aria-hidden="true" onclick="buchAnAus('Buch4')" type="button">Buch 4 <span id="b4a">⇦</span></button><br/>
+<button aria-hidden="true" onclick="buchAnAus(this, 'Buch4')" type="button">Buch 4 <span id="b4a"> ▼</span></button>
 <div class="blocksatz" id="Buch4">
 <article class="uw">
 <p class="de" id="d4.1" lang="de">[4.1] 
@@ -879,7 +879,7 @@
 </div>
 </section>
 <section id="kapitelbox5">
-<button aria-hidden="true" onclick="buchAnAus('Buch5')" type="button"> Buch 5 <span id="b5a">⇦</span> </button><br/>
+<button aria-hidden="true" onclick="buchAnAus(this, 'Buch5')" type="button">Buch 5 <span id="b5a"> ▼</span></button>
 <div class="blocksatz" id="Buch5">
 <article class="uw">
 <p class="de" id="d5.1" lang="de">[5.1] Bei Tagesanbruch, wenn du nicht aufstehen willst, sage dir: „Ich stehe für die Arbeit eines Mannes auf. Beschwere ich mich etwa, wenn ich hinausgehe, um zu tun, wofür ich geschaffen wurde? Wofür ich auf die Welt gebracht wurde? Oder wurde ich geboren, um mich in Decken zu hüllen und mich warm zu halten?<br/>-- “Aber das ist angenehmer.”  --<br/>Wurdest du dann zum Vergnügen geboren, nur zum Fühlen, nicht zum Handeln?<br/>Kannst du nicht die Pflanzen, Vögel, Ameisen, Spinnen und Bienen sehen, die alle ihre Arbeit verrichten und dabei helfen, die Welt zu ordnen? Aber du willst nicht die Arbeit eines Menschen tun? So handelst du nicht nach deiner eigenen Natur.<br/>--“Aber Ruhe braucht man auch!”—<br/>Das tut man in der Tat, da stimme ich zu. Aber auch hier hat die Natur Grenzen gesetzt, ebenso wie beim Essen und Trinken, und doch geht man über diese Grenzen hinaus,- über das hinaus, was man braucht… Du jedoch nichtmehr in deinen Taten. Hier bleibst du hinter dem zurück, was du kannst…<br/>Der Punkt ist, dass du dich selbst nicht liebst. Sonst würdest du sowohl deine eigene Natur als auch ihre Bestimmung für dich lieben. Andere Menschen lieben ihre Berufung und vergessen über deren Ausübung Bad und Essen. Du jedoch achtest weniger auf deine eigene Natur als der Schmied auf seine Metallarbeiten, der Tänzer auf seinen Tanz, der Geldgierige auf sein Silber, der Ehrgeizige auf seine Ruhmesstunde.<br/>Diese Menschen verzichten, in ihrer Leidenschaft, auf Nahrung und Schlaf, um ihre Beschäftigungen zu fördern: Aber du denkst, dass soziales Handeln weniger wichtig, - weniger der Anstrengung wert ist?</p>
@@ -1181,7 +1181,7 @@
 
 </section>
 <section id="kapitelbox6">
-<button aria-hidden="true" onclick="buchAnAus('Buch6')" type="button"> Buch 6 <span id="b6a">⇦</span> </button><br/>
+<button aria-hidden="true" onclick="buchAnAus(this, 'Buch6')" type="button">Buch 6 <span id="b6a"> ▼</span></button>
 <div class="blocksatz" id="Buch6">
 <article class="uw">
 <p class="de" id="d6.1" lang="de">[6.1] Die Substanz des Universums ist fügsam und wohlgeordnet, und die sie leitende Vernunft hat keinen Anlass etwas Böses zu tun; denn sie hat keine Bosheit in sich, tut nichts Schlechtes und wird auch nicht durch Bosheit geschädigt. Alles jedoch geschieht nach ihr und wird durch sie vollendet.</p>
